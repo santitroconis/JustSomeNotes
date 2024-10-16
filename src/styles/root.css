@@ -1,0 +1,30 @@
+:root {
+  --primary-color: #64726a;
+  --secondary-color: #d9d9d9;
+  --tertiary-color: #ffffff;
+  --primary-font: "Aktifo-A-Bold";
+  --secondary-font: "LeagueSpartan-Bold";
+  --tertiary-font: "LeagueSpartan-Regular";
+  --quaternary-font: "LeagueSpartan-Light";
+}
+
+@font-face {
+  font-family: "Aktifo-A-Black";
+  src: url(../assets/fonts/Aktifo-A-Black.ttf);
+}
+@font-face {
+  font-family: "Aktifo-A-Bold";
+  src: url(../assets/fonts/Aktifo-A-Bold.ttf);
+}
+@font-face {
+  font-family: "LeagueSpartan-Regular";
+  src: url(../assets/fonts/LeagueSpartan-Regular.ttf);
+}
+@font-face {
+  font-family: "LeagueSpartan-Bold";
+  src: url(../assets/fonts/LeagueSpartan-Bold.ttf);
+}
+@font-face {
+  font-family: "LeagueSpartan-Light";
+  src: url(../assets/fonts/LeagueSpartan-Light.ttf);
+}

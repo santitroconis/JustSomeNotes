@@ -1,0 +1,46 @@
+@import url(/src/styles/root.css);
+
+.login_wrapper {
+  width: 100vw;
+  height: 100vh;
+  display: grid;
+  grid-auto-rows: 20vh 1fr;
+  text-align: end;
+}
+
+.login_header {
+  padding: 2vw;
+  font-family: var(--primary-font);
+  font-size: 9.5vh;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  grid-column: 1/3;
+}
+.login_content {
+  background-color: var(--secondary-color);
+  grid-column: 1/3;
+  grid-row: 2/2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: var(--quaternary-font);
+}
+.text_container {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+.text {
+  font-size: 3vh;
+  color: #999999;
+  margin: 1vh;
+}
+.signup_link {
+  font-size: 3vh;
+  color: #0376c9;
+  margin: 1vh;
+  text-decoration: none;
+}
