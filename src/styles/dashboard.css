@@ -79,10 +79,10 @@
   justify-content: center;
 }
 .guide_text {
-  font-family: var(--secondary-font);
+  font-family: var(--tertiary-font);
   color: var(--tertiary-color);
-  background-color: var(--quaternary-color);
-  padding: 10px;
-  font-size: 3vh;
+  background-color: var(--primary-color);
+  padding: 8px 20px;
+  font-size: 2.5vh;
   border-radius: 20px;
 }

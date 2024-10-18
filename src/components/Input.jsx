@@ -3,6 +3,7 @@ import "./input.css";
 const Input = ({
   type,
   value,
+  name,
   onChange,
   placeholder,
   minLength,
@@ -13,6 +14,7 @@ const Input = ({
     <input
       className="input"
       type={type}
+      name={name}
       value={value}
       onChange={onChange}
       placeholder={placeholder}

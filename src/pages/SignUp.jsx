@@ -1,6 +1,25 @@
 import Form from "../components/Form";
 import Input from "../components/Input";
 import "../styles/signup.css";
+import { supabase } from "../lib/supabase";
+
+async function createUser(event) {
+  event.preventDefault();
+  const data = new FormData(event.target);
+  const userData = {
+    username: data.get("username"),
+    email: data.get("email"),
+    password: data.get("password"),
+  };
+  console.log(userData);
+
+  const { error } = await supabase.from("user").insert(userData);
+  if (error) {
+    console.error("Error creating user:", error);
+  } else {
+    console.log("User created successfully");
+  }
+}
 
 export default function Signup() {
   return (
@@ -8,7 +27,7 @@ export default function Signup() {
       <div className="signup_wrapper">
         <div className="signup_header">JUST SOME NOTES</div>
         <div className="signup_content">
-          <Form>
+          <Form onSubmit={createUser}>
             <img
               className="signup_logo"
               src="/src/assets/images/JSN-logo.svg"
@@ -16,6 +35,7 @@ export default function Signup() {
             />
             <Input
               id="username"
+              name="username"
               type="text"
               placeholder="username"
               minLength={5}
@@ -24,22 +44,20 @@ export default function Signup() {
             />
             <Input
               id="email"
+              name="email"
               type="email"
               placeholder="email"
-              minLength={7}
-              maxLength={25}
               required
             />
             <Input
               id="password"
+              name="password"
               type="password"
               placeholder="password"
-              minLength={4}
-              maxLength={20}
               required
             />
             <button className="button" type="submit">
-              Register
+              Sign Up
             </button>
           </Form>
           <div className="text_container">
