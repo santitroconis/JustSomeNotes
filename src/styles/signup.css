@@ -1,4 +1,7 @@
 @import url(/src/styles/root.css);
+* {
+  cursor: auto;
+}
 
 .signup_wrapper {
   width: 100vw;
@@ -8,6 +11,7 @@
   text-align: end;
 }
 .signup_header {
+  cursor: default;
   padding: 2vw;
   font-family: var(--primary-font);
   font-size: 9.5vh;
@@ -25,24 +29,45 @@
   justify-content: center;
   align-items: center;
   font-family: var(--quaternary-font);
-}
-.form_wrapper {
-  height: 100%;
-  width: 100%;
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr 1fr;
   box-sizing: border-box;
 }
+
+.form {
+  padding: 20px 50px;
+  width: 40vw;
+}
+
 .signup_logo {
   height: 10vh;
   padding: 5px;
+  margin: 10px 0px 30px 0px;
   background-image: url(/src/assets/logo.png);
   background-size: cover;
   background-position: center;
   box-sizing: border-box;
 }
 
+.input {
+  width: 60%;
+}
+
+.button {
+  width: 50%;
+  margin: 30px 0px 20px 0px;
+  padding: 8px;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  font-size: 2.5vh;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s;
+  font-family: var(--primary-font);
+  border-radius: 20px;
+  cursor: pointer;
+}
+
 .text_container {
+  cursor: default;
   padding: 10px;
   display: flex;
   justify-content: center;
@@ -55,6 +80,7 @@
   margin: 1vh;
 }
 .login_link {
+  cursor: pointer;
   font-size: 3vh;
   color: #0376c9;
   margin: 1vh;

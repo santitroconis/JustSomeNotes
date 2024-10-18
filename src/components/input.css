@@ -1,0 +1,16 @@
+.input {
+  padding: 5px;
+  margin: 5px;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  font-size: 20px;
+  transition: border-color 0.3s;
+  text-indent: 15px;
+  font: var(--secondary-font);
+}
+
+.input:focus {
+  border-color: var(--primary-color);
+  outline: none;
+}

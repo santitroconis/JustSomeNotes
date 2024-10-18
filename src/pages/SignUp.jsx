@@ -1,4 +1,5 @@
 import Form from "../components/Form";
+import Input from "../components/Input";
 import "../styles/signup.css";
 
 export default function Signup() {
@@ -8,22 +9,42 @@ export default function Signup() {
         <div className="signup_header">JUST SOME NOTES</div>
         <div className="signup_content">
           <Form>
-            <div className="form_wrapper">
-              <img
-                className="signup_logo"
-                src="/src/assets/images/JSN-logo.svg"
-                alt="app_logo"
-              />
-              <form action="">
-                <input id="username" type="text" />
-                <input id="email" type="email" />
-                <input id="password" type="password" name="" />
-              </form>
-            </div>
+            <img
+              className="signup_logo"
+              src="/src/assets/images/JSN-logo.svg"
+              alt="app_logo"
+            />
+            <Input
+              id="username"
+              type="text"
+              placeholder="username"
+              minLength={5}
+              maxLength={15}
+              required
+            />
+            <Input
+              id="email"
+              type="email"
+              placeholder="email"
+              minLength={7}
+              maxLength={25}
+              required
+            />
+            <Input
+              id="password"
+              type="password"
+              placeholder="password"
+              minLength={4}
+              maxLength={20}
+              required
+            />
+            <button className="button" type="submit">
+              Register
+            </button>
           </Form>
           <div className="text_container">
             <h6 className="text">
-              Alredy have an account?{" "}
+              Already have an account?{" "}
               <a className="login_link" href="/login">
                 Log In
               </a>{" "}

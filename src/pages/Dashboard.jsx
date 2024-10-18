@@ -7,9 +7,11 @@ import "../styles/dashboard.css";
 
 // JASON WEB TOKEN
 // LOCAL STORAGE O COOKIES
-// PARAMERTROS POR EL HEADER
+// PARAMETROS POR EL HEADER
 
 export default function Dashboard() {
+  const [activeNote, setActiveNote] = useState(null);
+
   const [notes, setNotes] = useState(null);
 
   async function getData() {
@@ -31,25 +33,38 @@ export default function Dashboard() {
 
           <div className="dashboard_sidebar">
             <div className="dashboard_note_container">
-              {notes === null ? (
-                <Loader />
-              ) : (
-                notes?.map((note) => {
-                  return (
-                    <Nota
-                      key={note.uuid}
-                      name={note.name}
-                      description={note.description}
-                    />
-                  );
-                })
-              )}
+              {notes?.map((note) => (
+                <Nota
+                  key={note.uuid}
+                  uuid={note.uuid}
+                  name={note.name}
+                  description={note.description}
+                  onClick={() => {
+                    setActiveNote(note);
+                    document
+                      .querySelectorAll(".note")
+                      .forEach((el) => el.classList.remove("active"));
+                    document
+                      .querySelector(`.note[data-key="${note.uuid}"]`)
+                      .classList.add("active");
+                  }}
+                />
+              ))}
             </div>
           </div>
-          <div className="dashboard_note_title">Title</div>
+          <div className="dashboard_note_title">
+            {activeNote === null ? "Title" : <div>{activeNote.name}</div>}
+          </div>
           <div className="dashboard_content">
-            <div className="dashboard_note_description">Description</div>
-            <div className="dashboard_content_body"></div>
+            {activeNote === null ? (
+              <div className="guide_flex">
+                <div className="guide_text">Select or create a note</div>
+              </div>
+            ) : (
+              <div className="dashboard_note_description">
+                {activeNote === null ? "" : <div>{activeNote.description}</div>}
+              </div>
+            )}
           </div>
         </div>
       )}
