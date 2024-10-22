@@ -1,38 +1,85 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../lib/supabase";
 import Form from "../components/Form";
 import Input from "../components/Input";
 import "../styles/signup.css";
-import { supabase } from "../lib/supabase";
 
-async function createUser(event) {
+async function createUser(event, navigate) {
   event.preventDefault();
   const data = new FormData(event.target);
-  const userData = {
-    username: data.get("username"),
-    email: data.get("email"),
-    password: data.get("password"),
-  };
-  console.log(userData);
+  const email = data.get("email");
+  const password = data.get("password");
+  const username = data.get("username");
 
-  const { error } = await supabase.from("user").insert(userData);
-  if (error) {
-    console.error("Error creating user:", error);
+  const errorMessageDiv = document.querySelector(".error_message");
+
+  // Check if the username or email already exists
+  const { data: existingUser, error: checkError } = await supabase
+    .from("user")
+    .select("*")
+    .or(`username.eq.${username},email.eq.${email}`);
+
+  if (checkError) {
+    errorMessageDiv.textContent = `Error checking user: ${checkError.message}`;
+    errorMessageDiv.classList.add("error");
+    errorMessageDiv.classList.remove("success");
+    errorMessageDiv.style.display = "block";
+    return;
+  }
+
+  if (existingUser.length > 0) {
+    errorMessageDiv.textContent = "Username or email already exists";
+    errorMessageDiv.classList.add("error");
+    errorMessageDiv.classList.remove("success");
+    errorMessageDiv.style.display = "block";
+    return;
+  }
+
+  const { data: newUser, error: insertError } = await supabase
+    .from("user")
+    .insert([{ username, email, password }]);
+
+  if (insertError) {
+    if (
+      insertError.message.includes(
+        "duplicate key value violates unique constraint"
+      )
+    ) {
+      errorMessageDiv.textContent =
+        "Please choose a different username or email.";
+    } else {
+      errorMessageDiv.textContent = `${insertError.message}`;
+    }
+    errorMessageDiv.classList.add("error");
+    errorMessageDiv.classList.remove("success");
+    errorMessageDiv.style.display = "block";
   } else {
-    console.log("User created successfully");
+    errorMessageDiv.textContent = "User created successfully";
+    errorMessageDiv.classList.add("success");
+    errorMessageDiv.classList.remove("error");
+    errorMessageDiv.style.display = "block";
+    navigate("/login");
   }
 }
 
 export default function Signup() {
+  const navigate = useNavigate();
+
   return (
     <div className="Sign_up">
       <div className="signup_wrapper">
         <div className="signup_header">JUST SOME NOTES</div>
         <div className="signup_content">
-          <Form onSubmit={createUser}>
+          <Form onSubmit={(event) => createUser(event, navigate)}>
             <img
               className="signup_logo"
               src="/src/assets/images/JSN-logo.svg"
               alt="app_logo"
             />
+
+            <div className="error_message" style={{ display: "none" }}></div>
+
             <Input
               id="username"
               name="username"
@@ -56,7 +103,7 @@ export default function Signup() {
               placeholder="password"
               required
             />
-            <button className="button" type="submit">
+            <button className="signup_button" type="submit">
               Sign Up
             </button>
           </Form>

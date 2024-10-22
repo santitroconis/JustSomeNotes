@@ -1,12 +1,5 @@
-import Form from "./components/Form";
-import Input from "./components/Input";
+import Button from "./components/Button";
 
 export default function ComponentsTest() {
-  return (
-    <Form>
-      <Input></Input>
-      <Input></Input>
-      <Input></Input>
-    </Form>
-  );
+  return <Button classname="button">Click me</Button>;
 }

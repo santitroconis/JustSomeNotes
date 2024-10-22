@@ -48,7 +48,7 @@
   width: 60%;
 }
 
-.button {
+.login_button {
   width: 50%;
   margin: 30px 0px 20px 0px;
   padding: 8px;
@@ -62,6 +62,9 @@
   border-radius: 20px;
   cursor: pointer;
 }
+.login_button:hover {
+  background-color: var(--quaternary-color);
+}
 
 .text_container {
   padding: 10px;
@@ -70,16 +73,31 @@
   align-items: center;
   box-sizing: border-box;
 }
+
 .text {
   font-size: 3vh;
   color: #999999;
   margin: 1vh;
   cursor: default;
 }
+
 .signup_link {
   cursor: pointer;
   font-size: 3vh;
   color: #0376c9;
   margin: 1vh;
   text-decoration: none;
+}
+
+.error_message {
+  font-size: 2vh;
+  margin: 1vh;
+}
+
+.error_message.error {
+  color: red;
+}
+
+.error_message.success {
+  color: green;
 }

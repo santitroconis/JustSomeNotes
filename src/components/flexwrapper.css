@@ -1,0 +1,13 @@
+.flex-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.flex-wrapper > * {
+  flex: 1 1 auto;
+  min-width: 200px;
+  max-width: 400px;
+}

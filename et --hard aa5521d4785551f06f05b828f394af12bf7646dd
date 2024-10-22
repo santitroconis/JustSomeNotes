@@ -1,0 +1,29 @@
+[33mcommit 6d55ec165472e677ad62b04a4c0508ab8c8dcfb1[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: santitroconis <santitroconis@gmail.com>
+Date:   Fri Oct 18 17:26:28 2024 -0400
+
+    Database conection: Conection to Signup and supabase new policies
+
+[33mcommit f7aa408b9d4ed92a757b535aae6b628c1bd75f43[m
+Author: santitroconis <santitroconis@gmail.com>
+Date:   Fri Oct 18 16:03:38 2024 -0400
+
+    Changes and develop: Added functionalities, components and fixed some errors
+
+[33mcommit aa5521d4785551f06f05b828f394af12bf7646dd[m
+Author: santitroconis <santitroconis@gmail.com>
+Date:   Wed Oct 16 13:38:40 2024 -0400
+
+    first commit
+
+[33mcommit 42a85a14026ae947642d2cd477b9254c86c49009[m
+Author: santitroconis <santitroconis@gmail.com>
+Date:   Wed Oct 16 13:38:08 2024 -0400
+
+    first commit
+
+[33mcommit a3afb284bf4c9514a4c8352a06fe99c42a51bfc2[m
+Author: santitroconis <santitroconis@gmail.com>
+Date:   Wed Oct 16 13:33:05 2024 -0400
+
+    Initial commit

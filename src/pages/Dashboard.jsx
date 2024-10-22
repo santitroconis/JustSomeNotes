@@ -5,18 +5,30 @@ import Nota from "../components/Nota";
 import Loader from "../components/loader";
 import "../styles/dashboard.css";
 
-// JASON WEB TOKEN
-// LOCAL STORAGE O COOKIES
-// PARAMETROS POR EL HEADER
-
 export default function Dashboard() {
   const [activeNote, setActiveNote] = useState(null);
-
   const [notes, setNotes] = useState(null);
 
   async function getData() {
-    const { data, error } = await supabase.from("note_1").select("*");
-    setNotes(data);
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (user) {
+      const { data, error } = await supabase
+        .from("note")
+        .select("*")
+        .eq("username", user.username);
+
+      if (error) {
+        console.error("Error fetching user notes:", error);
+        setNotes([]);
+      } else {
+        setNotes(data);
+      }
+    } else {
+      // Handle case where no user is logged in
+      console.error("No user is logged in");
+      setNotes([]);
+    }
   }
 
   useEffect(() => {
