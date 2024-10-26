@@ -4,6 +4,7 @@ import { supabase } from "../lib/supabase";
 import Form from "../components/Form";
 import Input from "../components/Input";
 import "../styles/login.css";
+import Logo from "/src/assets/images/JSN-logo.svg";
 
 async function loginUser(event, navigate) {
   event.preventDefault();
@@ -77,11 +78,7 @@ export default function Login() {
         <div className="login_header">JUST SOME NOTES</div>
         <div className="login_content">
           <Form onSubmit={(event) => loginUser(event, navigate)}>
-            <img
-              className="login_logo"
-              src="/src/assets/images/JSN-logo.svg"
-              alt="app_logo"
-            />
+            <img className="login_logo" src={Logo} alt="app_logo" />
 
             <div className="error_message" style={{ display: "none" }}></div>
 

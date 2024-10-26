@@ -3,6 +3,11 @@ import { supabase } from "../lib/supabase";
 import Nota from "../components/Nota";
 import Loader from "../components/Loader";
 import "../styles/dashboard.css";
+import Trash from "/src/assets/images/trash.svg";
+import Add from "/src/assets/images/add.svg";
+import Save from "/src/assets/images/save.svg";
+import Edit from "/src/assets/images/edit.svg";
+import Logout from "/src/assets/images/logout.svg";
 
 export default function Dashboard() {
   const [activeNoteId, setActiveNoteId] = useState(null);
@@ -39,11 +44,11 @@ export default function Dashboard() {
     getData();
   }, []);
 
-  const handleEditClick = () => {
+  const gitEditClick = () => {
     setIsEditMode(true);
   };
 
-  const handleSaveClick = async () => {
+  const gitSaveClick = async () => {
     if (activeNoteId) {
       const { error } = await supabase
         .from("note")
@@ -64,7 +69,7 @@ export default function Dashboard() {
     setIsEditMode(false);
   };
 
-  const handleNoteClick = (note) => {
+  const gitNoteClick = (note) => {
     setActiveNoteId(note.note_uuid);
     setActiveNoteContent({
       name: note.name,
@@ -73,7 +78,7 @@ export default function Dashboard() {
     setIsEditMode(false);
   };
 
-  const handleAddNoteClick = async () => {
+  const gitAddNoteClick = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       console.error("No user is logged in");
@@ -99,7 +104,7 @@ export default function Dashboard() {
     }
   };
 
-  const handleDeleteClick = async () => {
+  const gitDeleteClick = async () => {
     if (activeNoteId) {
       const { error } = await supabase
         .from("note")
@@ -117,7 +122,7 @@ export default function Dashboard() {
     }
   };
 
-  const handleLogoutClick = () => {
+  const gitLogoutClick = () => {
     localStorage.removeItem("user");
     window.location.href = "/home";
   };
@@ -135,9 +140,9 @@ export default function Dashboard() {
           <div className="dashboard_header_wrapper">
             <img
               className="logout_icon"
-              src="/src/assets/images/logout.svg"
+              src={Logout}
               alt="logout"
-              onClick={handleLogoutClick}
+              onClick={gitLogoutClick}
             />
             <div className="dashboard_header">JUST SOME NOTES</div>
           </div>
@@ -150,7 +155,7 @@ export default function Dashboard() {
                   uuid={note.note_uuid}
                   name={note.name}
                   description={note.description}
-                  onClick={() => handleNoteClick(note)}
+                  onClick={() => gitNoteClick(note)}
                   isActive={activeNoteId === note.note_uuid}
                 />
               ))}
@@ -178,27 +183,27 @@ export default function Dashboard() {
             <div className="note_icons_wrapper">
               <img
                 className="notes_icon"
-                src="/src/assets/images/add.svg"
+                src={Add}
                 alt="add"
-                onClick={handleAddNoteClick}
+                onClick={gitAddNoteClick}
               />
               <img
                 className="notes_icon"
-                src="/src/assets/images/save.svg"
+                src={Save}
                 alt="save"
-                onClick={handleSaveClick}
+                onClick={gitSaveClick}
               />
               <img
                 className="notes_icon"
-                src="/src/assets/images/edit.svg"
+                src={Edit}
                 alt="edit"
-                onClick={handleEditClick}
+                onClick={gitEditClick}
               />
               <img
                 className="notes_icon"
-                src="/src/assets/images/trash.svg"
+                src={Trash}
                 alt="delete"
-                onClick={handleDeleteClick}
+                onClick={gitDeleteClick}
               />
             </div>
           </div>

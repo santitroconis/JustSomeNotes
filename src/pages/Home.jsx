@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Logo from "/src/assets/images/JSN-logo.svg";
 import Nota from "../components/Nota";
 import "../styles/home.css";
 
@@ -21,19 +22,11 @@ export default function Home() {
   return (
     <div className="Home">
       {notes === null ? (
-        <img
-          className="home_logo"
-          src="/src/assets/images/JSN-logo.svg"
-          alt="app_logo"
-        />
+        <img className="home_logo" src={Logo} alt="app_logo" />
       ) : (
         <div className="home_wrapper">
           <div className="home_div_logo">
-            <img
-              className="home_logo"
-              src="/src/assets/images/JSN-logo.svg"
-              alt="app_logo"
-            />
+            <img className="home_logo" src={Logo} alt="app_logo" />
           </div>
           <div className="home_sidebar">
             <div className="home_container">
