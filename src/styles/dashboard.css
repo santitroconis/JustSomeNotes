@@ -72,10 +72,12 @@
   font-family: var(--secondary-font);
   font-size: 7vh;
   color: var(--tertiary-color);
-  box-sizing: border-box;
-  width: 85%;
+  width: 50vw;
   display: flex;
   align-items: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .note_icons_wrapper {
@@ -97,6 +99,8 @@
   padding: 20px;
   box-sizing: border-box;
   display: flex;
+  overflow-y: scroll;
+  scrollbar-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 
 .dashboard_note_description {
@@ -107,8 +111,6 @@
   line-height: 1.3;
   text-align: justify;
   width: 100%;
-  overflow-y: scroll;
-  scrollbar-color: rgba(255, 255, 255, 0) rgba(255, 255, 255, 0);
 }
 .guide_flex {
   display: flex;
