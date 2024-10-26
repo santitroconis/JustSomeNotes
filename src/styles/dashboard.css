@@ -17,6 +17,7 @@
 }
 
 .dashboard_header {
+  box-sizing: border-box;
   padding: 2vh;
   font-family: var(--primary-font);
   font-size: 9vh;
@@ -31,10 +32,11 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--tertiary-color);
-  grid-row: 2/3;
+  grid-row: 2/4;
 }
 
 .dashboard_note_container {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,15 +44,44 @@
   gap: 2vh;
   padding: 20px;
   width: 100%;
-  box-sizing: border-box;
 }
 
-.dashboard_note_title {
+.dashboard_note_title_wrapper {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
   background-color: var(--quaternary-color);
   padding: 15px;
+}
+.dashboard_note_title {
   font-family: var(--secondary-font);
   font-size: 7vh;
   color: var(--tertiary-color);
+  box-sizing: border-box;
+  width: 85%;
+  display: flex;
+  align-items: center;
+}
+.dashboard_note_title input,
+.dashboard_note_description textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+.note_icons_wrapper {
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  gap: 1vw;
+  padding-right: 15px;
+}
+.notes_icon {
+  cursor: pointer;
+  width: 5vh;
 }
 
 .dashboard_content {
@@ -85,4 +116,24 @@
   padding: 8px 20px;
   font-size: 2.5vh;
   border-radius: 20px;
+}
+
+.edit_title_mode {
+  border: none;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0);
+  margin-top: 5px;
+  width: 95%;
+  font-family: var(--secondary-font);
+  font-size: 7vh;
+  color: var(--tertiary-color);
+  height: 7.5vh;
+}
+
+.edit_description_mode {
+  border: none;
+  background-color: rgba(255, 255, 255, 0);
+  font-family: var(--tertiary-font);
+  font-size: 4vh;
+  height: 50vh;
 }

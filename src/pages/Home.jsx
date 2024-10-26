@@ -1,11 +1,13 @@
 import { useEffect } from "react";
 import { supabase } from "../lib/supabase";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Nota from "../components/Nota";
 import "../styles/home.css";
 
 export default function Home() {
   const [notes, setNotes] = useState(null);
+  const navigate = useNavigate();
 
   async function getData() {
     const { data, error } = await supabase.from("note_1").select("*");
@@ -49,9 +51,24 @@ export default function Home() {
             </div>
           </div>
           <div className="home_header">
-            {" "}
             The simplest way <br />
             to keep notes
+          </div>
+          <div className="home_buttons">
+            <div className="home_buttons_wrapper">
+              <button
+                className="login_home_button"
+                onClick={() => navigate("/login")}
+              >
+                Log In
+              </button>
+              <button
+                className="signup_home_button"
+                onClick={() => navigate("/signup")}
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
           <div className="home_content"></div>
         </div>

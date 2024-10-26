@@ -12,7 +12,7 @@
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-columns: 26.45vw 1fr;
+  grid-template-columns: 26.45vw 1fr 25vw;
   grid-auto-rows: 27.49vh 1fr;
 }
 .home_div_logo {
@@ -42,9 +42,56 @@
   grid-column: 2/2;
 }
 
+.home_buttons {
+  background-color: var(--primary-color);
+  grid-column: 3/4;
+  grid-row: 1/1;
+}
+
+.home_buttons_wrapper {
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin: 0;
+  padding: 30px;
+}
+
+.login_home_button,
+.signup_home_button {
+  padding: 5px;
+  width: 100%;
+  font-family: var(--primary-font);
+  font-size: 4vh;
+  border-radius: 30px;
+  margin: 5px 0;
+  border: 3px solid var(--tertiary-color);
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.login_home_button {
+  color: var(--primary-color);
+}
+
+.signup_home_button {
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
+  margin-right: 150px;
+}
+
+.signup_home_button:hover,
+.login_home_button:hover {
+  font-size: 4.5vh;
+}
+
 .home_content {
   background-color: var(--secondary-color);
-  grid-column: 2/2;
+  grid-column: 2/4;
   grid-row: 2/2;
   padding: 20px;
 }

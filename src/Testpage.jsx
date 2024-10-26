@@ -1,5 +1,5 @@
-import Button from "./components/Button";
+// import button from "./components/button";
 
 export default function ComponentsTest() {
-  return <Button classname="button">Click me</Button>;
+  return <button classname="button">Click me</button>;
 }
