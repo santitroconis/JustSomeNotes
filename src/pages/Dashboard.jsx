@@ -20,7 +20,8 @@ export default function Dashboard() {
       const { data, error } = await supabase
         .from("note")
         .select("*")
-        .eq("username", user.username);
+        .eq("username", user.username)
+        .order("modified_at", { ascending: false });
 
       if (error) {
         console.error("Error fetching user notes:", error);
@@ -44,19 +45,20 @@ export default function Dashboard() {
 
   const handleSaveClick = async () => {
     if (activeNoteId) {
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("note")
         .update({
           name: activeNoteContent.name,
           description: activeNoteContent.description,
+          modified_at: new Date(),
         })
         .eq("note_uuid", activeNoteId);
 
       if (error) {
         console.error("Error updating note:", error);
       } else {
-        console.log("Note updated successfully:", data);
-        getData(); // Recarga las notas
+        console.log("Note updated successfully");
+        getData();
       }
     }
     setIsEditMode(false);
@@ -71,7 +73,6 @@ export default function Dashboard() {
     setIsEditMode(false);
   };
 
-  // Nueva función para agregar una nota
   const handleAddNoteClick = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
@@ -81,8 +82,8 @@ export default function Dashboard() {
 
     const newNote = {
       username: user.username,
-      name: "Title",
-      description: "Description",
+      name: "New Title",
+      description: "New Description",
     };
 
     const { data, error } = await supabase.from("note").insert([newNote]);
@@ -90,18 +91,35 @@ export default function Dashboard() {
     if (error) {
       console.error("Error creating note:", error);
     } else {
-      if (data && data.length > 0) {
-        console.log("Note created successfully:", data);
-        setActiveNoteId(data[0].note_uuid);
-        setActiveNoteContent(newNote);
-        setIsEditMode(true);
-        setTimeout(() => {
-          getData();
-        }, 1000);
+      console.log("Note created successfully:", data);
+      setActiveNoteId(data[0].note_uuid);
+      setActiveNoteContent(newNote);
+      setIsEditMode(true);
+      getData();
+    }
+  };
+
+  const handleDeleteClick = async () => {
+    if (activeNoteId) {
+      const { error } = await supabase
+        .from("note")
+        .delete()
+        .eq("note_uuid", activeNoteId);
+
+      if (error) {
+        console.error("Error deleting note:", error);
       } else {
-        console.error("No data returned from the insert operation");
+        console.log("Note deleted successfully");
+        setActiveNoteId(null);
+        setActiveNoteContent({ name: "", description: "" });
+        getData();
       }
     }
+  };
+
+  const handleLogoutClick = () => {
+    localStorage.removeItem("user");
+    window.location.href = "/home";
   };
 
   return (
@@ -114,7 +132,15 @@ export default function Dashboard() {
         </div>
       ) : (
         <div className="dashboard_wrapper">
-          <div className="dashboard_header">JUST SOME NOTES</div>
+          <div className="dashboard_header_wrapper">
+            <img
+              className="logout_icon"
+              src="/src/assets/images/logout.svg"
+              alt="logout"
+              onClick={handleLogoutClick}
+            />
+            <div className="dashboard_header">JUST SOME NOTES</div>
+          </div>
 
           <div className="dashboard_sidebar">
             <div className="dashboard_note_container">
@@ -125,16 +151,10 @@ export default function Dashboard() {
                   name={note.name}
                   description={note.description}
                   onClick={() => handleNoteClick(note)}
-                  isActive={activeNoteId === note.note_uuid} // Condición para activar una sola nota
+                  isActive={activeNoteId === note.note_uuid}
                 />
               ))}
             </div>
-            <img
-              className="notes_icon"
-              src="/src/assets/images/add.svg"
-              alt="add"
-              onClick={handleAddNoteClick}
-            />
           </div>
 
           <div className="dashboard_note_title_wrapper">
@@ -160,7 +180,7 @@ export default function Dashboard() {
                 className="notes_icon"
                 src="/src/assets/images/add.svg"
                 alt="add"
-                onClick={handleAddNoteClick} // Asigna el evento para agregar nota
+                onClick={handleAddNoteClick}
               />
               <img
                 className="notes_icon"
@@ -178,6 +198,7 @@ export default function Dashboard() {
                 className="notes_icon"
                 src="/src/assets/images/trash.svg"
                 alt="delete"
+                onClick={handleDeleteClick}
               />
             </div>
           </div>
