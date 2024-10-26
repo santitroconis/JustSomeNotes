@@ -44,11 +44,11 @@ export default function Dashboard() {
     getData();
   }, []);
 
-  const gitEditClick = () => {
+  const EditClick = () => {
     setIsEditMode(true);
   };
 
-  const gitSaveClick = async () => {
+  const SaveClick = async () => {
     if (activeNoteId) {
       const { error } = await supabase
         .from("note")
@@ -69,7 +69,7 @@ export default function Dashboard() {
     setIsEditMode(false);
   };
 
-  const gitNoteClick = (note) => {
+  const NoteClick = (note) => {
     setActiveNoteId(note.note_uuid);
     setActiveNoteContent({
       name: note.name,
@@ -78,7 +78,7 @@ export default function Dashboard() {
     setIsEditMode(false);
   };
 
-  const gitAddNoteClick = async () => {
+  const AddNoteClick = async () => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (!user) {
       console.error("No user is logged in");
@@ -96,6 +96,7 @@ export default function Dashboard() {
     if (error) {
       console.error("Error creating note:", error);
     } else {
+      location.reload();
       console.log("Note created successfully:", data);
       setActiveNoteId(data[0].note_uuid);
       setActiveNoteContent(newNote);
@@ -104,7 +105,7 @@ export default function Dashboard() {
     }
   };
 
-  const gitDeleteClick = async () => {
+  const DeleteClick = async () => {
     if (activeNoteId) {
       const { error } = await supabase
         .from("note")
@@ -122,7 +123,7 @@ export default function Dashboard() {
     }
   };
 
-  const gitLogoutClick = () => {
+  const LogoutClick = () => {
     localStorage.removeItem("user");
     window.location.href = "/home";
   };
@@ -142,7 +143,7 @@ export default function Dashboard() {
               className="logout_icon"
               src={Logout}
               alt="logout"
-              onClick={gitLogoutClick}
+              onClick={LogoutClick}
             />
             <div className="dashboard_header">JUST SOME NOTES</div>
           </div>
@@ -155,7 +156,7 @@ export default function Dashboard() {
                   uuid={note.note_uuid}
                   name={note.name}
                   description={note.description}
-                  onClick={() => gitNoteClick(note)}
+                  onClick={() => NoteClick(note)}
                   isActive={activeNoteId === note.note_uuid}
                 />
               ))}
@@ -185,25 +186,25 @@ export default function Dashboard() {
                 className="notes_icon"
                 src={Add}
                 alt="add"
-                onClick={gitAddNoteClick}
+                onClick={AddNoteClick}
               />
               <img
                 className="notes_icon"
                 src={Save}
                 alt="save"
-                onClick={gitSaveClick}
+                onClick={SaveClick}
               />
               <img
                 className="notes_icon"
                 src={Edit}
                 alt="edit"
-                onClick={gitEditClick}
+                onClick={EditClick}
               />
               <img
                 className="notes_icon"
                 src={Trash}
                 alt="delete"
-                onClick={gitDeleteClick}
+                onClick={DeleteClick}
               />
             </div>
           </div>
