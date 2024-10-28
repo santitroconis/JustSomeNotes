@@ -87,8 +87,8 @@ export default function Dashboard() {
 
     const newNote = {
       username: user.username,
-      name: "New Title",
-      description: "New Description",
+      name: "Title",
+      description: "Description",
     };
 
     const { data, error } = await supabase.from("note").insert([newNote]);
@@ -101,7 +101,10 @@ export default function Dashboard() {
       setActiveNoteId(data[0].note_uuid);
       setActiveNoteContent(newNote);
       setIsEditMode(true);
-      getData();
+
+      setTimeout(() => {
+        getData();
+      }, 1000);
     }
   };
 
