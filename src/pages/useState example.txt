@@ -1,0 +1,33 @@
+import { useState } from "react";
+import "./App.css";
+
+function App() {
+  const [person, setPerson] = useState({
+    name: "name",
+    lastname: "lastname",
+    email: "@",
+  });
+
+  function onValueChange(e) {
+    setPerson({ ...person, [e.target.id]: e.target.value });
+  }
+
+  return (
+    <div className="App">
+      <input id="name" value={person.name} onChange={onValueChange} />
+      <input id="lastname" value={person.lastname} onChange={onValueChange} />
+      <input
+        id="email"
+        value={person.email}
+        type="email"
+        onChange={onValueChange}
+      />
+
+      <div>
+        {person.name} {person.lastname} {person.email}
+      </div>
+    </div>
+  );
+}
+
+export default App;
